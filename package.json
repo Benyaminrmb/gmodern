@@ -1,0 +1,30 @@
+{
+    "private": true,
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "nuxt": "3.0.0"
+    },
+    "dependencies": {
+        "@headlessui/vue": "^1.7.7",
+        "@nuxt/kit": "^3.0.0",
+        "@nuxtjs/color-mode": "^3.2.0",
+        "@nuxtjs/tailwindcss": "^6.2.0",
+        "@pinia/nuxt": "^0.4.6",
+        "@tailwindcss/line-clamp": "^0.4.2",
+        "@vueuse/nuxt": "^9.9.0",
+        "daisyui": "^2.46.0",
+        "pinia": "^2.0.28",
+        "postcss": "^8.4.20",
+        "prettier": "^2.8.1",
+        "sass": "^1.57.1",
+        "swiper": "^8.4.5",
+        "tailwindcss": "^3.2.4",
+        "vue-awesome-swiper": "^5.0.1"
+    }
+}

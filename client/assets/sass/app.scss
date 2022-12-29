@@ -1,0 +1,60 @@
+html{
+    font-family: vazir,tahoma !important;
+}
+.swiper-pagination-bullet-active {
+  @apply bg-yellow-400 #{!important};
+}
+.dir-ltr {
+  direction: ltr;
+}
+.dir-rtl {
+  direction: rtl;
+}
+.content-color {
+  @apply text-black dark:text-white;
+}
+@font-face {
+  font-family: 'vazir';
+  src: url('../fonts/vazir/Vazir-Medium-FD-WOL.woff2') format('woff2'),
+    url('../fonts/vazir/Vazir-Medium-FD-WOL.woff') format('woff');
+}
+// THE LOADING EFFECT
+.skeleton {
+
+    // The shine that's going to move across the skeleton:
+    background-image:
+        linear-gradient(
+                90deg,
+                rgba(#fff, 0),
+                rgba(#4d4b72, 0.5),
+                rgba(#fff, 0)
+        );
+    background-size: 40px 100%; // width of the shine
+    background-repeat: no-repeat; // No need to repeat the shine effect
+    background-position: left -40px top 0; // Place shine on the left side, with offset on the left based on the width of the shine - see background-size
+    animation: shine 1.5s ease infinite; // increase animation time to see effect in 'slow-mo'
+}
+
+@keyframes shine {
+    to {
+        // Move shine from left to right, with offset on the right based on the width of the shine - see background-size
+        background-position: right -40px top 0;
+    }
+}
+
+//::-webkit-scrollbar {
+//    width: 16px;
+//}
+//::-webkit-scrollbar-track {
+//    background: theme('colors.gray.100');
+//    border-left: 1px solid theme('colors.gray.200');
+//}
+//::-webkit-scrollbar-thumb {
+//    border: 4px solid theme('colors.gray.100');
+//    background-clip: padding-box;
+//    border-radius: 9999px;
+//    background-color: theme('colors.slate.300');
+//}
+//::-webkit-scrollbar-thumb:hover {
+//    background-color: theme('colors.slate.400');
+//}
