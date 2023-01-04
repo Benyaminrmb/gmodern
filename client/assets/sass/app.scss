@@ -1,6 +1,9 @@
 html{
     font-family: vazir,tahoma !important;
 }
+[data-theme="dark"] *{
+    color-scheme: dark;
+}
 .swiper-pagination-bullet-active {
   @apply bg-yellow-400 #{!important};
 }

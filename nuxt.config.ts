@@ -5,6 +5,15 @@ export default defineNuxtConfig({
         strict: true,
         shim: false
     },
+    runtimeConfig: {
+        // Private keys are only available on the server
+        apiSecret: '123',
+        // Public keys that are exposed to the client
+        public: {
+            apiBase: process.env.API_URL || '/api'
+        },
+        apiUrl: 'http://localhost:8000'
+    },
     modules: [
         // ...
         '@pinia/nuxt',
@@ -27,9 +36,7 @@ export default defineNuxtConfig({
         injectPosition: 0,
         viewer: true,
     },
-    publicRuntimeConfig: {
-        API_URL: process.env.API_URL,
-    },
+
     app: {
         head: {
 
