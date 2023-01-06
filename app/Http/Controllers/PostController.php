@@ -154,17 +154,13 @@ class PostController extends Controller
 
     public function getAdminList()
     {
-        $posts = Post::orderBy('id', 'desc')
-            ->with('source_url.source')
-            ->with('categories')
-            ->select("posts.*", "posts.created_at as created_at")
-            ->get();
-        $result = [];
-        foreach ($posts as $post) {
-            $post->shamsi_created_at = Verta::instance($post->created_at)->format('%B %d، %Y');
-            $result[] = $post;
-        }
-        return response()->json($result);
+
+        $posts= Post::paginate(10)->through(function ($item) {
+            return PostResource::make($item);
+        });
+
+
+        return $this->generateResponse($posts);
     }
 
     public function postUpdate($id, Request $request)
@@ -360,4 +356,6 @@ class PostController extends Controller
 
         return $this->generateResponse(LikeResource::make($post));
     }
+
+
 }

@@ -29,10 +29,15 @@ Route::put('/post/{id}/dislike', [\App\Http\Controllers\PostController::class, '
 Route::post('/get/posts', [\App\Http\Controllers\PostController::class, 'getList']);
 Route::post('/get/posts/category/{id}', [\App\Http\Controllers\PostController::class, 'getListByCategory']);
 Route::post('/get/posts/source/{id}', [\App\Http\Controllers\PostController::class, 'getListBySource']);
-Route::get('/get/post/{id}', [\App\Http\Controllers\PostController::class, 'getDetail']);
+Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, 'getDetail']);
 Route::post('/get/categories', [\App\Http\Controllers\CategoryController::class, 'getList']);
 Route::post('/get/category/{id}', [\App\Http\Controllers\PostController::class, 'getListByCategory']);
 
 Route::apiResource('/logs', \App\Http\Controllers\LogController::class)->only('store');
 Route::get('/sources', [\App\Http\Controllers\SourceController::class,'getAllSources']);
 Route::get('/scraper', [\App\Http\Controllers\CrawlerController::class, 'run']);
+
+Route::middleware(['auth:api','admin'])->prefix('admin')->group(function(){
+    Route::get('/user', [\App\Http\Controllers\UserController::class,'getUsers']);
+    Route::get('/post', [\App\Http\Controllers\PostController::class,'getAdminList']);
+});

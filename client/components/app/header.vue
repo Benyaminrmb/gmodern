@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {useAuth} from '../../stores/auth'
+import {useAuth} from '~/stores/auth'
 
 const use_auth = useAuth()
 const logOut = async () => {
@@ -31,7 +31,9 @@ const changeTheme = () => {
             <nuxt-link to="/login"> login </nuxt-link>
           </li>
 
-          <li><nuxt-link to="/admin">admin</nuxt-link></li>
+          <li class="rounded-md">
+            <nuxt-link to="/admin">admin</nuxt-link>
+          </li>
         </ul>
       </div>
 
@@ -98,7 +100,7 @@ const changeTheme = () => {
   </div>
 </template>
 <style>
-.router-link-active{
-    @apply bg-base-200 !important
+.router-link-active {
+  @apply bg-base-200 !important;
 }
 </style>

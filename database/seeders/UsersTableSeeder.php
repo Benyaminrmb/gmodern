@@ -33,6 +33,6 @@ class UsersTableSeeder extends Seeder
         ]);
 
         // random dummy users
-        User::factory(9)->create();
+        User::factory(50)->create();
     }
 }

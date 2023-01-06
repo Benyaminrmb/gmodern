@@ -1,9 +1,9 @@
-import { useAuth } from "../../stores/auth";
+import { useAuth } from "~/stores/auth";
 
 export const useFetchUser = async () => {
     const env_data = useRuntimeConfig();
     const use_auth = useAuth();
-    const token = useCookie("token");
+    let token = useCookie("token");
     return await $fetch("/api/user", {
         baseURL: env_data.public.apiBase,
         method: "GET",
@@ -19,6 +19,7 @@ export const useFetchUser = async () => {
             return res;
         })
         .catch((error) => {
+            token.value=null
             return error.data;
         });
 };

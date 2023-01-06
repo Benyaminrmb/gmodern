@@ -9,12 +9,14 @@ const props = defineProps({
 <template>
   <div
     class="flex p-4 hover:bg-base-200 border border-base-100 transition ease-out gap-3 bg-base-100 rounded-3xl flex-wrap w-full">
-    <div class="flex flex-wrap w-full">
-      <img
-        class="w-full rounded-3xl"
-        :src="props.item.image.large"
-        alt="props.item.title" />
-    </div>
+    <nuxt-link :to="`/post/${item.id}`">
+      <div class="flex flex-wrap w-full">
+        <img
+          class="w-full rounded-3xl h-[207px] object-cover"
+          :src="props.item.image.large"
+          alt="props.item.title" />
+      </div>
+    </nuxt-link>
     <div class="flex items-center gap-3 flex-wrap w-full">
       <div class="flex">
         <img
@@ -22,9 +24,11 @@ const props = defineProps({
           :alt="props.item.source.source.name"
           class="flex w-8 h-8 bg-white rounded-full p-2 ease-out transition hover:ring-4 ring-0 ring-primary/60" />
       </div>
+        <nuxt-link :to="`/post/${item.id}`">
       <h2 class="text-lg flex-1 content-color leading-8">
         {{ props.item.title }}
       </h2>
+        </nuxt-link>
     </div>
     <div class="h-[1px] w-full bg-base-200"></div>
     <div class="flex flex-wrap">
