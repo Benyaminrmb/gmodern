@@ -14,10 +14,19 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 
-await useGetIndexPosts();
-const index_data = await usePosts();
-const banner_posts = index_data.data.bannerPosts;
-const main_posts = index_data.data.indexPosts.data;
+const route = useRoute()
+const router = useRouter()
+let page = ref(route.query.page ? route.query.page : 1)
+
+let index_data = await useGetIndexPosts(page)
+const changePage = async (new_page: any) => {
+    router.push({
+        query: {page: new_page},
+    })
+    index_data = await useGetIndexPosts(new_page)
+}
+
+
 const modules = [Pagination, Autoplay];
 const options = {
     slidesPerView: "auto",
@@ -25,6 +34,7 @@ const options = {
 };
 </script>
 <template>
+    pppp {{ page }}
     <div class="grid grid-cols-12 w-full gap-3">
         <div class="flex flex-wrap col-span-3">3</div>
         <div class="flex flex-wrap col-span-6 gap-6">
@@ -104,12 +114,22 @@ const options = {
                 >
             </div>
 
-            <div v-if="main_posts" class="grid grid-cols-2 w-full gap-4">
+            <div v-if="main_posts.data" class="grid grid-cols-2 w-full gap-4">
                 <post-item
-                    v-for="(post, index) in main_posts"
+                    v-for="(post, index) in main_posts.data"
                     :item="post"
                     :key="index"
                 />
+                <div class="flex flex-wrap w-full justify-center">
+                    <div class="btn-group">
+                        <button
+                            v-for="page in main_posts.links"
+                            v-html="page.label"
+                            @click="changePage(page.label)"
+                            :disabled="page.active || !page.url"
+                            class="btn"></button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="flex flex-wrap col-span-3">3</div>

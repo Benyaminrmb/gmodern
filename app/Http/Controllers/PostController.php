@@ -21,25 +21,10 @@ class PostController extends Controller
 {
     public function getList(Request $request)
     {
-
-
-        $current_page = $request->input("page") ?? 1;
-        $per_page = '9';
-        $skip = ($current_page - 1) * $per_page;
-        $all_posts = Post::status('active')
-            ->orderBy('id', 'desc')
-            ->count();
-        $posts = Post::status('active')
-            ->skip($skip)
-            ->orderBy('id', 'desc')
-            ->limit($per_page)
-            ->get();
         $sources = Source::all();
-
-
-        $total_count = $all_posts;
-
-        $posts = $this->resourcePagination(PostResource::collection($posts), $total_count, $per_page, $current_page);
+        $posts = Post:: status('active')->orderBy('id', 'desc')->paginate(10)->through(function ($item) {
+            return PostResource::make($item);
+        });
 
 
         $bannerPosts = PostResource::collection($this->getPostsByPosition('banner', '5'));
@@ -155,7 +140,7 @@ class PostController extends Controller
     public function getAdminList()
     {
 
-        $posts= Post::paginate(10)->through(function ($item) {
+        $posts = Post::paginate(10)->through(function ($item) {
             return PostResource::make($item);
         });
 
@@ -239,8 +224,8 @@ class PostController extends Controller
         $total_count = $all_posts;
 
         $posts = $this->resourcePagination(PostResource::collection($posts), $total_count, $per_page, $current_page);
-        $bannerPosts = PostResource::collection($this->getPostsByPosition('banner', '5',$category_id));
-        $specialPosts = PostResource::collection($this->getPostsByPosition('special', '4',$category_id));
+        $bannerPosts = PostResource::collection($this->getPostsByPosition('banner', '5', $category_id));
+        $specialPosts = PostResource::collection($this->getPostsByPosition('special', '4', $category_id));
 
         $posts = array_merge(
             ['indexPosts' => $posts],
@@ -279,8 +264,8 @@ class PostController extends Controller
         $total_count = $all_posts;
 
         $posts = $this->resourcePagination(PostResource::collection($posts), $total_count, $per_page, $current_page);
-        $bannerPosts = PostResource::collection($this->getPostsByPosition('banner', '5',$category_id));
-        $specialPosts = PostResource::collection($this->getPostsByPosition('special', '4',$category_id));
+        $bannerPosts = PostResource::collection($this->getPostsByPosition('banner', '5', $category_id));
+        $specialPosts = PostResource::collection($this->getPostsByPosition('special', '4', $category_id));
 
         $posts = array_merge(
             ['indexPosts' => $posts],
@@ -321,8 +306,7 @@ class PostController extends Controller
 
         $posts = array_merge(['post' => $post], ['special_posts' => $special_posts], ['category_posts' => $category_posts]);
 
-        return response()->json($posts);
-
+        return $this->generateResponse($posts);
     }
 
     public
