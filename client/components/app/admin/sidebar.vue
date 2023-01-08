@@ -25,6 +25,10 @@ const sidebar_items = [
         name: 'لیست مقالات',
         link: '/admin/post',
       },
+        {
+            name: 'خزش',
+            link: '/admin/crawl',
+        },
     ],
   },
 ]
@@ -50,7 +54,7 @@ const sidebar_items = [
         >
       </div>
       <div class="h-4"></div>
-      <ul class="menu menu-compact flex flex-col p-0 px-4">
+      <ul class="menu menu-compact flex gap-3 flex-col p-0 px-4">
         <template v-for="(menu, index) in sidebar_items">
           <li v-if="index"></li>
           <li class="menu-title">
