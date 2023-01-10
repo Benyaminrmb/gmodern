@@ -1,37 +1,48 @@
 <script lang="ts" setup>
-import { usePosts } from "~/stores/posts";
-import { useGetIndexPosts } from "~/composables/useGetIndexPosts";
+import {usePosts} from '~/stores/posts'
+
+import {useGetIndexPosts} from '~/composables/useGetIndexPosts'
 // import Swiper core and required modules
-import { Pagination, Autoplay } from "swiper";
+import {Pagination, Autoplay} from 'swiper'
 
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from "swiper/vue";
+import {Swiper, SwiperSlide} from 'swiper/vue'
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+import 'swiper/css/autoplay'
+import {useGetPosts} from "~/composables/admin/post/useGetPosts";
 
 const route = useRoute()
 const router = useRouter()
+const nuxtApp = useNuxtApp()
+
 let page = ref(route.query.page ? route.query.page : 1)
 
 let index_data = await useGetIndexPosts(page)
+let banner_posts = index_data.data.bannerPosts;
+let main_posts = index_data.data.indexPosts;
 const changePage = async (new_page: any) => {
     router.push({
         query: {page: new_page},
     })
     index_data = await useGetIndexPosts(new_page)
+    banner_posts = index_data.data.bannerPosts;
+    main_posts = index_data.data.indexPosts;
+    document.body.scrollIntoView({behavior: 'smooth', block: 'start'});
+
 }
 
 
-const modules = [Pagination, Autoplay];
+
+const modules = [Pagination, Autoplay]
 const options = {
-    slidesPerView: "auto",
-    spaceBetween: 10,
-};
+  slidesPerView: 'auto',
+  spaceBetween: 10,
+}
 </script>
 <template>
     pppp {{ page }}
@@ -137,10 +148,10 @@ const options = {
 </template>
 <style>
 .swiper-pagination-bullet-active {
-    @apply bg-primary !important;
+  @apply bg-primary !important;
 }
 
 .swiper-pagination-bullet {
-    @apply opacity-100 bg-base-300;
+  @apply opacity-100 bg-base-300;
 }
 </style>

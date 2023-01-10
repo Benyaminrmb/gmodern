@@ -40,7 +40,7 @@ class PostController extends Controller
             ['allSources' => $allSources]
         );
 
-        return $this->generateResponse($posts, true, null, 201);
+        return $this->generateResponse($posts);
     }
 
     public function getPostsByPosition($position, $limit, $category_id = null)

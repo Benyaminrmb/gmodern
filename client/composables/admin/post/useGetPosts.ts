@@ -1,4 +1,4 @@
-export const useGetPosts = async (page:Number) => {
+export const useGetPosts = async (page: Number) => {
   const env_data = useRuntimeConfig()
   const token = useCookie('token')
   let data = null
