@@ -1,5 +1,6 @@
 html{
     font-family: vazir,tahoma !important;
+    scroll-behavior: smooth; /* set scroll-behaviour to smooth here */
 }
 [data-theme="dark"] *{
     color-scheme: dark;
