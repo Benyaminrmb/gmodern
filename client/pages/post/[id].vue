@@ -5,9 +5,15 @@ const route = useRoute()
 const post_id = route.params.id
 let posts = await useGetPost(post_id)
 const post = posts.data.post
+function readingTime(text) {
+    const wpm = 225
+    const words = text.trim().split(/\s+/).length
+    return Math.ceil(words / wpm)
+}
+const timeToRead = readingTime(post.html)
 </script>
 <template>
-  <div class="flex flex-wrap p-4 w-full">
+  <div class="flex flex-wrap p-4 w-full gap-4">
     <div class="grid grid-cols-2 flex-wrap gap-4">
       <div class="flex flex-wrap w-full items-end content-end gap-4">
         <div class="flex flex-wrap w-full gap-3">
@@ -25,7 +31,18 @@ const post = posts.data.post
         <div class="flex flex-wrap w-full">
           <p class="text-base leading-8 text-base-content">{{ post.text }}</p>
         </div>
-        <div class="flex flex-wrap w-full gap-2 items-center">
+      </div>
+      <div class="flex flex-wrap w-full">
+        <img
+          :src="post.image.large"
+          :alt="post.title"
+          class="w-full flex rounded-3xl" />
+      </div>
+    </div>
+    <div class="grid grid-cols-4 flex-wrap gap-4 w-full">
+      <div
+        class="flex p-4 col-span-3 border border-base-100 transition ease-out gap-3 bg-base-100 rounded-3xl flex-wrap w-full">
+        <div class="flex sticky backdrop-blur-xl bg-base-100/90 top-16 p-3  flex-wrap w-full gap-2 items-center">
           <div class="flex">
             <img
               :src="post.source.source.icon"
@@ -44,20 +61,16 @@ const post = posts.data.post
           <span class="flex text-sm">
             {{ post.created_at.shamsi }}
           </span>
+          <span>|</span>
+          <span class="flex text-sm">
+              زمان مطالعه : {{ timeToRead }}
+          </span>
         </div>
+        <div class="leading-8 post-body text-justify" v-html="post.html"></div>
       </div>
-      <div class="flex flex-wrap w-full">
-        <img
-          :src="post.image.large"
-          :alt="post.title"
-          class="w-full flex rounded-3xl" />
+      <div class="flex flex-wrap p-4 justify-center items-center w-full">
+        benyaminrmb
       </div>
-    </div>
-    <div class="grid grid-cols-4 flex-wrap gap-4 w-full">
-      <div v-html="post.html" class="flex col-span-3 flex-wrap p-4 w-full">
-
-      </div>
-      <div class="flex flex-wrap p-4 w-full">ddd</div>
     </div>
   </div>
 </template>

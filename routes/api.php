@@ -40,5 +40,10 @@ Route::middleware(['auth:api','admin'])->prefix('admin')->group(function(){
     Route::get('/user', [\App\Http\Controllers\UserController::class,'getUsers']);
     Route::get('/post', [\App\Http\Controllers\PostController::class,'getAdminList']);
     Route::get('/crawler', [\App\Http\Controllers\CrawlerController::class, 'run']);
+    Route::prefix('post')->group(function () {
+        Route::get('/', [\App\Http\Controllers\PostController::class, 'getAdminList']);
+        Route::put('/{post}', [\App\Http\Controllers\PostController::class, 'postUpdate']);
+
+    });
 
 });
