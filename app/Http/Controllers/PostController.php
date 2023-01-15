@@ -148,10 +148,8 @@ class PostController extends Controller
         return $this->generateResponse($posts);
     }
 
-    public function postUpdate($id, Request $request)
+    public function postUpdate(Post $post, Request $request)
     {
-
-        $post = Post::find($id);
         $request->validate([
             'name' => 'string',
             'text' => 'string',
@@ -176,16 +174,17 @@ class PostController extends Controller
         }
 
         $post->update();
+        $post->refresh();
 
-        return response()->json($post);
+        return $this->generateResponse(PostResource::make($post));
     }
 
     public function booleanStatusToString($val): string
     {
-        if ($val) {
-            return 'removed';
+         if ($val) {
+            return 'active';
         }
-        return 'active';
+        return 'removed';
     }
 
     public function getAdminPost($id)
