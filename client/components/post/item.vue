@@ -9,7 +9,7 @@ const props = defineProps({
 <template>
   <div
     class="flex p-4 hover:bg-base-200 border border-base-100 transition ease-out gap-3 bg-base-100 rounded-3xl flex-wrap w-full">
-    <nuxt-link :to="`/post/${item.id}`">
+    <nuxt-link class="w-full flex" :to="`/post/${item.id}`">
       <div class="flex flex-wrap w-full">
         <img
           class="w-full rounded-3xl h-[207px] object-cover"
