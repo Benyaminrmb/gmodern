@@ -18,7 +18,7 @@ const changeTheme = () => {
 </script>
 <template>
   <div
-    class="navbar z-50 shadow border-b border-base-300 sticky top-0 gap-7 bg-base-100">
+    class="navbar z-50 shadow border-b border-base-300 backdrop-blur-xl sticky top-0 gap-7 bg-base-100/90">
     <div class="flex">
       <nuxt-link to="/" class="btn btn-ghost normal-case text-xl"
         >Gmodern</nuxt-link
