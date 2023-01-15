@@ -11,17 +11,18 @@ definePageMeta({
 useHead({
   title: 'خزش -',
 })
-let crawl_loading=false
+let crawl_loading=ref(false)
 let crawl_result=null
 const runCrawler =async ()=>{
-    crawl_loading=true
+    crawl_loading=ref(true)
     crawl_result = await useRunCrawler()
-    crawl_loading=false
+    crawl_loading=ref(false)
 }
 </script>
 
 <template>
     <div class="flex flex-wrap">
+        {{ crawl_loading }}
         <button @click="runCrawler"
                 :disabled="crawl_loading"
             class="btn btn-primary">شروع خزش</button>
