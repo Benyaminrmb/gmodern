@@ -62,3 +62,15 @@ html{
 //::-webkit-scrollbar-thumb:hover {
 //    background-color: theme('colors.slate.400');
 //}
+.post-body{
+    @apply flex flex-wrap gap-4;
+    .content-ads{
+        @apply hidden
+    }
+    *{
+        @apply flex flex-wrap gap-6 w-full
+    }
+    img{
+        @apply w-full rounded-2xl
+    }
+}
