@@ -73,4 +73,43 @@ html{
     img{
         @apply w-full rounded-2xl
     }
+    style{
+        @apply hidden
+    }
+}
+.card-crop:before, .card-crop::after {
+    content: " ";
+    background-image: inherit;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    height: inherit;
+    width: inherit;
+}
+.card-crop::before {
+    background-size: cover !important;
+    opacity: 0.6;
+    filter: blur(8px);
+}
+.card-crop::after {
+    background-size: contain !important;
+    background-origin: content-box;
+    padding: 5px;
+}
+.inline-block, .inline-block:before, .inline-block:after {
+    display: inline-block;
+    height: 225px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.card-crop {
+    background-color: #ffffff;
+    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    background-position: -1px -1px;
+    background-size: 1px;
+}
+.inline-block:after {
+    position: absolute;
 }
