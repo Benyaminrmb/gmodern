@@ -67,8 +67,8 @@ html{
     .content-ads{
         @apply hidden
     }
-    *{
-        @apply flex flex-wrap gap-6 w-full
+    em{
+        @apply font-light;
     }
     img{
         @apply w-full rounded-2xl
