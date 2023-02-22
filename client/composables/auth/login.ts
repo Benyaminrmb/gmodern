@@ -2,7 +2,7 @@ import { useAuth } from "~/stores/auth";
 interface awd {
     dd: string;
 }
-export const useAuthLogin = async (login_form) => {
+export const useAuthLogin = async (login_form:any) => {
     const env_data = useRuntimeConfig();
     const use_auth = useAuth();
     return await $fetch("/api/login", {
@@ -14,7 +14,7 @@ export const useAuthLogin = async (login_form) => {
             Accept: "application/json",
         },
     })
-        .then((res) => {
+        .then((res:any) => {
             // @ts-ignore
             use_auth.setUser(res.data.user);
             const token = useCookie("token");
