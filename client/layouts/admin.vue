@@ -34,7 +34,15 @@ const sidebarOpen = ref(false)
     <div class="drawer drawer-mobile">
       <input id="drawer" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content gap-6 flex flex-col items-center">
-        <app-header />
+        <app-header>
+          <div class="drawer-content">
+            <!-- Page content here -->
+            <label for="drawer" class="drawer-button btn btn-primary"
+              >Open drawer</label
+            >
+          </div></app-header
+        >
+
         <!-- Page content here -->
         <div class="flex flex-wrap pb-16 px-6 w-full">
           <slot />
