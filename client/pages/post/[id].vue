@@ -15,11 +15,11 @@ const post = posts.data.post
 
       <div class="flex flex-wrap w-full">
         <div
-          class="flex col-span-3 border border-base-100 transition ease-out gap-3 bg-base-100 rounded-3xl flex-wrap w-full">
+          class="flex col-span-3 border border-base-100 transition ease-out bg-base-100 rounded-3xl flex-wrap w-full">
           <sticky-nav :post="post"/>
             <div
                 class="leading-8 flex flex-wrap gap-3 text-justify">
-                <img :src="post.image.large" alt="">
+                <img class="w-full" :src="post.image.large" alt="">
                 <div class="flex w-full flex-wrap gap-3">
                     <post-category-item :categories="post.categories"/>
                 </div>
