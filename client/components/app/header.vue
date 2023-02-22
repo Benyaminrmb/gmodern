@@ -24,6 +24,7 @@ const changeTheme = () => {
         >Gmodern</nuxt-link
       >
     </div>
+      <slot/>
     <div class="flex flex-wrpa w-full justify-between">
       <div class="flex navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal p-0">
