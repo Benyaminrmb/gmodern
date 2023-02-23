@@ -29,11 +29,11 @@ const changeTheme = () => {
       <div class="flex navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal p-0">
           <li v-if="!use_auth.user.id">
-            <nuxt-link to="/login"> login </nuxt-link>
+            <nuxt-link to="/login"> ورود </nuxt-link>
           </li>
 
-          <li class="rounded-md">
-            <nuxt-link to="/admin">admin</nuxt-link>
+          <li v-if="use_auth.user.id && use_auth.user.is_admin" class="rounded-md">
+            <nuxt-link to="/admin">داشبورد</nuxt-link>
           </li>
         </ul>
       </div>
