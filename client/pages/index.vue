@@ -2,6 +2,9 @@
 import {usePosts} from '~/stores/posts'
 
 import {useGetIndexPosts} from '~/composables/useGetIndexPosts'
+useSeoMeta({
+    description:'جی مدرن gmodern- مرجع اخبار بازی، اخبار فیلم و سریال و اخبار دنیای تکنولوژی'
+})
 // import Swiper core and required modules
 import {Pagination, Autoplay} from 'swiper'
 
@@ -47,7 +50,7 @@ const changePage = async (new_page: number) => {
 posts_loading.value = false
 </script>
 <template>
-  {{ posts_loading }}
+
 
   <div class="grid grid-cols-12 w-full gap-3">
     <div class="flex flex-wrap col-span-3"></div>

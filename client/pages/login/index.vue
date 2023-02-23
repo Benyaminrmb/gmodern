@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import {useAuthLogin} from '~/composables/auth/login'
 import {userRand} from '~/composables/useGlobal'
-
+useSeoMeta({
+    title: 'ورود - ',
+    description:'ورود به سایت جی مدرن (gmodern)'
+})
 interface LoginForm {
   loading: boolean
   error?: {

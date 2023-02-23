@@ -41,16 +41,14 @@ export default defineNuxtConfig({
         head: {
 
             titleTemplate: '%s Gmodern | جی مدرن',
+            "og:titleTemplate": '%s Gmodern | جی مدرن',
             meta: [
                 {
                     name: 'viewport',
                     content: 'width=device-width, initial-scale=1',
                 },
-                {
-                    hid: 'description',
-                    name: 'description',
-                    content: 'best app',
-                },
+
+
             ],
             link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
         },

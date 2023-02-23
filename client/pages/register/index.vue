@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import {userRand} from '~/composables/useGlobal'
 import {useAuthRegister} from '~/composables/auth/regirster'
-
+useSeoMeta({
+    title: 'ثبت نام - ',
+    description:'ثبت نام در سایت جی مدرن (gmodern)'
+})
 interface RegisterForm {
   loading: boolean
   error?: {
