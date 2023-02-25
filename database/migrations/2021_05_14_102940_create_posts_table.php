@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('text')->nullable();
             $table->string('img')->nullable();
             $table->string('biggerImg')->nullable();
-            $table->string('url');
+            $table->text('url');
             $table->enum('status',['active','removed'])->default('active');
             $table->enum('position',['default','special','banner','advertising'])->default('default');
             $table->integer('visit')->default('0');
