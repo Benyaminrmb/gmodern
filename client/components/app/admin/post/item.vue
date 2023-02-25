@@ -8,12 +8,21 @@ let props = defineProps({
   },
 })
 let status = ref(props.item.status === 'active')
+let position = ref(props.item.position)
 const updateStatus = async (post: {id: Number; status: String}) => {
   const result = await useUpdatePost(post.id, {
     status: status.value,
   })
   if (result.success) {
       status = ref(result.data.status === 'active')
+  }
+}
+const updatePosition = async (post: {id: Number; position: String}) => {
+  const result = await useUpdatePost(post.id, {
+      position: position.value,
+  })
+  if (result.success) {
+      position = ref(result.data.position)
   }
 }
 </script>
@@ -57,7 +66,16 @@ const updateStatus = async (post: {id: Number; status: String}) => {
         :checked="props.item.status === 'active'" />
     </td>
     <td class="px-6 py-4">
-      {{ props.item.position }}
+        <select
+            v-model="position"
+            @change="updatePosition(props.item)"
+                id="position">
+            <option value="default">default</option>
+            <option value="special">special</option>
+            <option value="banner">banner</option>
+            <option value="advertising">advertising</option>
+        </select>
+
     </td>
 
     <td
