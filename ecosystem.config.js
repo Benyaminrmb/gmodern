@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: 'Gmodern.ir',
+            name: 'gmodern.ir',
             port: 5959,
             exec_mode: 'cluster',
             instances: 'max',
