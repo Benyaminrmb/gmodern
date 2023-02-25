@@ -36,13 +36,11 @@ Route::post('/get/category/{id}', [\App\Http\Controllers\PostController::class, 
 Route::apiResource('/logs', \App\Http\Controllers\LogController::class)->only('store');
 Route::get('/sources', [\App\Http\Controllers\SourceController::class, 'getAllSources']);
 
+Route::get('/crawler', [\App\Http\Controllers\CrawlerController::class, 'run']);
 Route::middleware(['auth:api', 'admin'])->prefix('admin')->group(function () {
     Route::get('/user', [\App\Http\Controllers\UserController::class, 'getUsers']);
-    Route::get('/crawler', [\App\Http\Controllers\CrawlerController::class, 'run']);
     Route::prefix('post')->group(function () {
         Route::get('/', [\App\Http\Controllers\PostController::class, 'getAdminList']);
         Route::put('/{post}', [\App\Http\Controllers\PostController::class, 'postUpdate']);
-
     });
-
 });
