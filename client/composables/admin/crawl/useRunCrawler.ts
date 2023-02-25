@@ -3,7 +3,7 @@ export const useRunCrawler = async () => {
   const token = useCookie('token')
   let data = null
 
-  data = await $fetch(`/api/admin/crawler`, {
+  data = await $fetch(`/api/crawler`, {
     baseURL: env_data.public.apiBase,
     method: 'GET',
 
