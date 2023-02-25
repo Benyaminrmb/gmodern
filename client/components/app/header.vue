@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {useAuth} from '~/stores/auth'
-
+import {ref} from 'vue'
 const use_auth = useAuth()
 const logOut = async () => {
   await use_auth.emptyUser()
@@ -15,16 +15,46 @@ const changeTheme = () => {
   }
   return (colorMode.preference = 'dark')
 }
+const offset = ref(false)
+
+const handleScroll = () => {
+  const scrollTop = document.documentElement.scrollTop
+  offset.value = scrollTop != 0
+}
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 <template>
   <div
-    class="navbar z-50 shadow border-b border-base-300 backdrop-blur-xl sticky top-0 gap-7 bg-base-100/90">
+    :class="{'border-base-100 shadow': offset}"
+    ref="header"
+    class="navbar z-50 transition ease-out border-b bg-gradient-to-r from-secondary/50 to-secondary/70 border-b-transparent backdrop-blur-3xl sticky top-0 gap-7">
+    <div class="flex md:hidden">
+      <label for="drawer" class="drawer-button">
+        <svg
+          class="dark:fill-white w-5"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512">
+          <!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+          <path
+            d="M0 80C0 71.16 7.164 64 16 64H432C440.8 64 448 71.16 448 80C448 88.84 440.8 96 432 96H16C7.164 96 0 88.84 0 80zM0 240C0 231.2 7.164 224 16 224H432C440.8 224 448 231.2 448 240C448 248.8 440.8 256 432 256H16C7.164 256 0 248.8 0 240zM432 416H16C7.164 416 0 408.8 0 400C0 391.2 7.164 384 16 384H432C440.8 384 448 391.2 448 400C448 408.8 440.8 416 432 416z" />
+        </svg>
+      </label>
+    </div>
     <div class="flex">
-      <nuxt-link to="/" class="btn btn-ghost normal-case text-xl"
+      <nuxt-link
+        to="/"
+        class="btn md:text-base text-xs btn-ghost normal-case text-xl"
         >Gmodern</nuxt-link
       >
     </div>
-      <slot/>
+
+    <slot />
     <div class="flex flex-wrpa w-full justify-between">
       <div class="flex navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal p-0">
@@ -32,7 +62,9 @@ const changeTheme = () => {
             <nuxt-link to="/login"> ورود </nuxt-link>
           </li>
 
-          <li v-if="use_auth.user.id && use_auth.user.is_admin" class="rounded-md">
+          <li
+            v-if="use_auth.user.id && use_auth.user.is_admin"
+            class="rounded-md">
             <nuxt-link to="/admin">داشبورد</nuxt-link>
           </li>
         </ul>
