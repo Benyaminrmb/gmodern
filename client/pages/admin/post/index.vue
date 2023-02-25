@@ -13,13 +13,40 @@ useHead({
   title: 'لیست مقالات -',
 })
 
-let posts = await useGetPosts(page)
-const changePage = async (new_page) => {
-  router.push({
-    query: {page: new_page},
-  })
-  posts = await useGetPosts(new_page)
+let posts = await useGetPosts(page.value)
+/*const changePage = async (new_page) => {
+    router.push({
+        query: {page: new_page},
+    })
+    posts.push(await useGetPosts(new_page))
+}*/
+const scrollComponent = ref(null)
+const handleScroll = () => {
+    console.log('awd')
+    let element = scrollComponent.value
+    // @ts-ignore
+    console.log('element.getBoundingClientRect().bottom',element.getBoundingClientRect().bottom)
+    console.log('window.innerHeight',window.innerHeight)
+    if (element.getBoundingClientRect().bottom < window.innerHeight) {
+        page.value++;
+        posts.data.data.push(useGetPosts(page.value).data.data)
+    }
 }
+const a=()=>{
+    console.log('awdawd')
+}
+window.addEventListener("scroll", a)
+onMounted(() => {
+    console.log('awdawd')
+    window.addEventListener("scroll", a)
+})
+onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll)
+})
+
+
+
+
 </script>
 
 <template>
@@ -27,6 +54,7 @@ const changePage = async (new_page) => {
     <div class="flex overflow-x-auto w-full">
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table
+            ref="scrollComponent"
           v-if="posts"
           class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
           <thead
@@ -52,7 +80,7 @@ const changePage = async (new_page) => {
             </tr>
           </thead>
           <tbody>
-            <app-admin-post-item v-for="item in posts.data.data" :item="item"/>
+            <lazy-app-admin-post-item v-for="item in posts.data.data" :item="item"/>
           </tbody>
         </table>
       </div>
