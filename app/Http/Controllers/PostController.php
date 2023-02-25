@@ -140,7 +140,7 @@ class PostController extends Controller
     public function getAdminList()
     {
 
-        $posts = Post::paginate(10)->through(function ($item) {
+        $posts = Post::orderBy('created_at','desc')->paginate(10)->through(function ($item) {
             return PostResource::make($item);
         });
 
@@ -280,6 +280,7 @@ class PostController extends Controller
 
     public function getDetail($id)
     {
+        ini_set('max_execution_time', 180);
         $crawlerController = new CrawlerController();
 
         $post = Post::where('id', $id)
