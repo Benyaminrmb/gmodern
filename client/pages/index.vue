@@ -71,13 +71,13 @@ posts_loading.value = false
             :key="index">
             <nuxt-link :to="`/post/${post.id}`" class="flex w-full flex-wrap">
               <div
-                class="flex rounded-3xl bg-origin-content bg-center bg-contain bg-no-repeat bg-sca flex-wrap w-full h-[320px]"
+                class="flex rounded-3xl bg-cover bg-origin-content bg-center bg-contain bg-no-repeat bg-sca flex-wrap w-full h-[320px]"
                 :style="`background-image:url(${post.image.large})`">
                 <div
                   class="absolute items-stretch dir-rtl grid grid-cols-6 w-full h-full bottom-0 right-0 bg-gradient-to-l from-base-100/90 p-3">
-                  <div class="flex flex-wrap gap-3 col-span-3">
+                  <div class="flex flex-wrap gap-3 md:col-span-3 col-span-12">
                     <h2
-                      class="flex w-full text-right flex-wrap content-color text-3xl leading-10">
+                      class="flex w-full text-right flex-wrap content-color md:text-3xl text-xl font-bold leading-10">
                       {{ post.title }}
                     </h2>
                     <div class="flex w-full flex-wrap">
