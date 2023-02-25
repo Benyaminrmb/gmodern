@@ -20,6 +20,8 @@ export default defineNuxtConfig({
         '@vueuse/nuxt',
         '@nuxtjs/tailwindcss',
         '@nuxtjs/color-mode',
+        '@vueuse/nuxt',
+
     ],
     build: {
         transpile: ['@headlessui/vue'],
