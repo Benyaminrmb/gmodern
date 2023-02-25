@@ -17,11 +17,12 @@ useSeoMeta({
 <template>
   <div class="grid grid-cols-12 w-full gap-3">
     <div class="flex flex-wrap col-span-3"></div>
-    <div class="flex flex-wrap col-span-12 md:col-span-6 gap-6">
+    <div class="flex flex-wrap col-span-12 md:col-span-6 p-4 gap-6">
       <div class="flex flex-wrap w-full">
+          <sticky-nav class="rounded-t-md" :post="post" />
         <div
-          class="flex col-span-3 border border-base-100 transition ease-out bg-base-100 rounded-3xl flex-wrap w-full">
-          <sticky-nav :post="post" />
+          class="flex col-span-3 w-full bg-white flex flex-wrap border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
           <div class="leading-8 flex flex-wrap gap-3 text-justify">
             <img class="w-full" :src="post.image.large" :alt="post.title" />
             <div class="flex w-full flex-wrap gap-3">
@@ -36,7 +37,7 @@ useSeoMeta({
               v-html="post.html"></div>
           </div>
           <div class="flex flex-wrap p-4 justify-center items-center w-full">
-            benyaminrmb
+            
           </div>
         </div>
       </div>
