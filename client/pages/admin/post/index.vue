@@ -1,10 +1,12 @@
 <script setup>
 import {useGetPosts} from '../../../composables/admin/post/useGetPosts'
+import {useInfiniteScroll,useVirtualList} from '@vueuse/core'
 const route = useRoute()
 const router = useRouter()
 let page = ref(route.query.page ? route.query.page : 1)
 
-
+const el = ref(null)
+let loading = ref(false)
 definePageMeta({
   layout: 'admin',
   middleware: ['admin'],
@@ -12,49 +14,31 @@ definePageMeta({
 useHead({
   title: 'لیست مقالات -',
 })
-
-let posts = await useGetPosts(page.value)
-/*const changePage = async (new_page) => {
-    router.push({
-        query: {page: new_page},
-    })
-    posts.push(await useGetPosts(new_page))
-}*/
-const scrollComponent = ref(null)
-const handleScroll = () => {
-    console.log('awd')
-    let element = scrollComponent.value
-    // @ts-ignore
-    console.log('element.getBoundingClientRect().bottom',element.getBoundingClientRect().bottom)
-    console.log('window.innerHeight',window.innerHeight)
-    if (element.getBoundingClientRect().bottom < window.innerHeight) {
-        page.value++;
-        posts.data.data.push(useGetPosts(page.value).data.data)
-    }
-}
-const a=()=>{
-    console.log('awdawd')
-}
-window.addEventListener("scroll", a)
-onMounted(() => {
-    console.log('awdawd')
-    window.addEventListener("scroll", a)
-})
-onUnmounted(() => {
-    window.removeEventListener("scroll", handleScroll)
-})
-
-
-
-
+loading.value = true
+let posts = ref(await useGetPosts(page.value))
+loading.value = false
+useInfiniteScroll(
+  el,
+  async () => {
+    loading.value = true
+    page.value++
+    const new_post = await useGetPosts(page.value)
+    let temporary_post = posts.value.data.data
+    loading.value = false
+    temporary_post.push(...new_post.data.data)
+  },
+  {distance: 5}
+)
 </script>
 
 <template>
   <div class="w-full flex flex-wrap gap-4">
+
     <div class="flex overflow-x-auto w-full">
-      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div
+        ref="el"
+        class="relative h-60 overflow-x-auto shadow-md sm:rounded-lg">
         <table
-            ref="scrollComponent"
           v-if="posts"
           class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
           <thead
@@ -80,19 +64,11 @@ onUnmounted(() => {
             </tr>
           </thead>
           <tbody>
-            <lazy-app-admin-post-item v-for="item in posts.data.data" :item="item"/>
+            <app-admin-post-item
+              v-for="item in posts.data.data"
+              :item="item" />
           </tbody>
         </table>
-      </div>
-    </div>
-    <div class="flex flex-wrap w-full justify-center">
-      <div class="btn-group">
-        <button
-          v-for="page in posts.data.links"
-          v-html="page.label"
-          @click="changePage(page.label)"
-          :disabled="page.active || !page.url"
-          class="btn"></button>
       </div>
     </div>
   </div>
