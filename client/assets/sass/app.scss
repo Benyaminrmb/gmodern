@@ -1,5 +1,5 @@
 html{
-    font-family: vazir,tahoma !important;
+    font-family: vazir, tahoma, serif !important;
     scroll-behavior: smooth; /* set scroll-behaviour to smooth here */
 }
 [data-theme="dark"] *{
@@ -17,10 +17,18 @@ html{
 .content-color {
   @apply text-black dark:text-white;
 }
+.dosis-font{
+    font-family: dosis, serif !important;
+}
 @font-face {
   font-family: 'vazir';
   src: url('../fonts/vazir/Vazir-Medium-FD-WOL.woff2') format('woff2'),
     url('../fonts/vazir/Vazir-Medium-FD-WOL.woff') format('woff');
+}
+@font-face {
+  font-family: 'dosis';
+  src: url('../fonts/dosis/Dosis-VariableFont_wght.ttf') format('truetype'),
+    url('../fonts/dosis/Dosis-VariableFont_wght.ttf') format('truetype');
 }
 // THE LOADING EFFECT
 .skeleton {
