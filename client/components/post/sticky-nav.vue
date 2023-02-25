@@ -14,7 +14,7 @@ const timeToRead = readingTime(props.post.html)
 </script>
 <template>
   <div
-    class="flex sticky z-20 backdrop-blur-xl bg-black/70 right-0 top-16 p-3 flex-wrap w-full gap-2 items-center">
+    class="flex z-20 backdrop-blur-xl dark:bg-black/70 bg-accent right-0 top-16 p-3 flex-wrap w-full gap-2 items-center">
     <div class="flex">
       <img
         :src="props.post.source.source.icon"
@@ -32,6 +32,6 @@ const timeToRead = readingTime(props.post.html)
       {{ props.post.created_at.shamsi }}
     </span>
     <span>|</span>
-    <span class="flex text-sm"> زمان مطالعه : {{ timeToRead }} </span>
+    <span class="flex text-xs">  زمان مطالعه : {{ timeToRead }} دقیقه</span>
   </div>
 </template>
