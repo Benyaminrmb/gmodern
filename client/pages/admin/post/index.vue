@@ -37,7 +37,7 @@ useInfiniteScroll(
     <div class="flex overflow-x-auto w-full">
       <div
         ref="el"
-        class="relative h-60 overflow-x-auto shadow-md sm:rounded-lg">
+        class="relative h-[500px] overflow-x-auto shadow-md sm:rounded-lg">
         <table
           v-if="posts"
           class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
