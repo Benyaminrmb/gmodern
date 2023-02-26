@@ -15,6 +15,7 @@ class Post extends Model
         'text',
         'img',
         'biggerImg',
+        'position',
         'created_at',
         'url',
     ];

@@ -22,7 +22,9 @@ class PostController extends Controller
     public function getList(Request $request)
     {
         $sources = Source::all();
-        $posts = Post:: status('active')->orderBy('id', 'desc')->paginate(10)->through(function ($item) {
+        $posts = Post::whereStatus('active')
+            ->whereNot('position',['advertising'])
+            ->orderBy('id', 'desc')->paginate(10)->through(function ($item) {
             return PostResource::make($item);
         });
 
