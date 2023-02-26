@@ -1,6 +1,8 @@
+import {useAdminPosts} from '~/stores/admin/posts'
 export const useGetPosts = async (page: Number) => {
   const env_data = useRuntimeConfig()
   const token = useCookie('token')
+  const use_admin_posts = useAdminPosts()
   let data = null
 
   data = await $fetch(`/api/admin/post?page=${page}`, {
@@ -14,6 +16,8 @@ export const useGetPosts = async (page: Number) => {
     },
   })
     .then((res: any) => {
+        use_admin_posts.setPost(res.data.data)
+
       return res
     })
     .catch((e) => {
